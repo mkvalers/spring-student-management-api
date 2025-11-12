@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: University Enrollment System
+  jwt:
+    secret: ${JWT_SECRET}
+    accessTokenExpiration: 300 #5m
+    refreshTokenExpiration: 604800 #7d
+  profiles:
+    active: dev

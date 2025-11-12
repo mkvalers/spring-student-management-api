@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASS}
+  jpa:
+    show-sql: true
+websiteUrl: http://localhost:8080
