@@ -11,7 +11,6 @@ A RESTful API for managing students, courses, and users, built with **Spring Boo
 * [Optional Local Setup](#optional-local-setup)
 * [API Documentation](#api-documentation)
 * [Authentication & Testing](#authentication--testing)
-* [License](#license)
 
 ---
 
