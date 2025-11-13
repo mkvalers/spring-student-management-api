@@ -72,7 +72,7 @@ mvn spring-boot:run
 
 Explore endpoints and models via Swagger OpenAPI:
 
-> 📄 **Swagger UI:** [Click here](https://spring-student-management-api-production.up.railway.app/swagger-ui/index.html)  
+📄 **Swagger UI:** [Click here](https://spring-student-management-api-production.up.railway.app/swagger-ui/index.html)  
 
 > Use this link to understand all available endpoints, request/response formats, and authentication requirements.
 
@@ -97,7 +97,7 @@ The API uses **JWT-based authentication**. The provided Postman collection handl
 
 This setup allows you to explore and test the API immediately using the provided accounts, without manually setting headers or tokens.
 
-> 🔗 **Postman Collection:** [Click here](https://mkvalerio20-2583706.postman.co/workspace/Mark-Valerio's-Workspace~eb7e1ea9-7d0f-4aee-86d5-e9853d984332/collection/48226500-a88149f1-fa27-4448-a369-fb0d69bc0022?action=share&creator=48226500&active-environment=48226500-99d65820-bb09-4b95-99db-68c4771a9e98)
+🔗 **Postman Collection:** [Click here](https://mkvalerio20-2583706.postman.co/workspace/Mark-Valerio's-Workspace~eb7e1ea9-7d0f-4aee-86d5-e9853d984332/collection/48226500-a88149f1-fa27-4448-a369-fb0d69bc0022?action=share&creator=48226500&active-environment=48226500-99d65820-bb09-4b95-99db-68c4771a9e98)
 
 ---
 
