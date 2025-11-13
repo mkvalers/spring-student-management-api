@@ -32,7 +32,7 @@ A RESTful API for managing students, courses, and users, built with **Spring Boo
 
 * **Backend:** Java 17, Spring Boot
 * **Security:** Spring Security, JWT
-* **Database:** MySQL / MariaDB
+* **Database:** MySQL
 * **ORM:** Hibernate / JPA
 * **API Documentation:** Springdoc OpenAPI (Swagger UI)
 * **Testing:** Postman
