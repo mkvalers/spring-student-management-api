@@ -42,7 +42,7 @@ A RESTful API for managing students, courses, and users, built with **Spring Boo
 
 * **Layers:** Controller → Service → Repository
 * **DTOs:** Used for request/response separation
-* **Database:** Relational schema with users, roles, students, courses, enrollments
+* **Database:** Relational schema with users, students, courses, enrollments
 * **JWT Security:** Token-based authentication; tokens stored in Postman variables for testing
 * **Error Handling:** Centralized exception handler for consistent API responses
 
