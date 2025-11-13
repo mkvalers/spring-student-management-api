@@ -1,7 +1,5 @@
 # Spring Student Management API
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-
 A RESTful API for managing students, courses, and users, built with **Spring Boot**, **Spring Security**, **Hibernate**, and **MySQL**. Features JWT-based authentication, role-based access control, and full CRUD operations.
 
 ---
@@ -121,12 +119,6 @@ Import the Postman collection to test all endpoints:
 1. Import the collection into Postman.
 2. Authenticate using `/auth/login` to get the JWT token.
 3. Set the token in `Authorization` header for subsequent requests.
-
----
-
-## License
-
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
 
 ---
 
