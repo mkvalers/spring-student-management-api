@@ -8,6 +8,7 @@ A RESTful API for managing students, courses, and users, built with **Spring Boo
 
 * [Features](#features)
 * [Tech Stack](#tech-stack)
+* [Architecture & Design](#architecture--design)
 * [Optional Local Setup](#optional-local-setup)
 * [API Documentation](#api-documentation)
 * [Authentication & Testing](#authentication--testing)
@@ -34,6 +35,16 @@ A RESTful API for managing students, courses, and users, built with **Spring Boo
 * **API Documentation:** Springdoc OpenAPI (Swagger UI)
 * **Hosting/Deployment:** Railway
 * **Testing:** Postman
+
+---
+
+## Architecture & Design
+
+* **Layers:** Controller → Service → Repository
+* **DTOs:** Used for request/response separation
+* **Database:** Relational schema with users, roles, students, courses, enrollments
+* **JWT Security:** Token-based authentication; tokens stored in Postman variables for testing
+* **Error Handling:** Centralized exception handler for consistent API responses
 
 ---
 
