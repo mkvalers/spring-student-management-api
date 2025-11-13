@@ -70,7 +70,7 @@ DATABASE_PASS=password
 JWT_SECRET=your_jwt_secret_key
 ```
 
-> For development, credentials can also be hardcoded in `application.yml` or `application.properties`.
+> For development, credentials can also be hardcoded in `application.yml-dev`
 
 ---
 
