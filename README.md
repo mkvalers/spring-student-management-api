@@ -45,7 +45,7 @@ A RESTful API for managing students, courses, and users, built with **Spring Boo
 
 * Java 17+
 * Maven
-* MySQL or MariaDB
+* MySQL
 * Postman (optional, for testing)
 
 ### Clone the Repository
