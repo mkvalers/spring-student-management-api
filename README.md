@@ -1,6 +1,6 @@
 # Spring Student Management API
 
-A RESTful API for managing students, courses, and users, built with **Spring Boot**, **Spring Security**, **Hibernate**, and **MySQL**. Features JWT-based authentication, role-based access control, and full CRUD operations. This API is deployed on **Railway** for live access.
+A RESTful API for managing students, courses, and users, built with **Spring Boot**, **Spring Security**, **Hibernate**, and **MySQL**. Features JWT-based authentication, role-based access control, and full CRUD operations. Includes API documentation and testing using **Swagger UI** and **Postman**, and is deployed on **Railway** for live access. live access.
 
 ---
 
