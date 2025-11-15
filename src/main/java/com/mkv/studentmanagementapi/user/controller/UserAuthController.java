@@ -17,7 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/auth")
-@Tag(name = "1. Authentication", description = "Admin Account: Email: alice@example.com | Password: password1")
+@Tag(name = "1. Authentication")
 public class UserAuthController {
 
     private final UserAuthService userAuthService;
