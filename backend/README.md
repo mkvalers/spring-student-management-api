@@ -6,45 +6,55 @@ A RESTful API for managing students, courses, and users, built with **Spring Boo
 
 ## Table of Contents
 
-* [Features](#features)
-* [Tech Stack](#tech-stack)
-* [Architecture & Design](#architecture--design)
-* [Optional Local Setup](#optional-local-setup)
-* [API Documentation](#api-documentation)
-* [Authentication & Testing](#authentication--testing)
+- [Deployment](#deployment)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Architecture & Design](#architecture--design)
+- [Optional Local Setup](#optional-local-setup)
+- [API Documentation](#api-documentation)
+- [Authentication & Testing](#authentication--testing)
+
+---
+
+## Deployment
+
+- The API is deployed on **Railway** and can be accessed at:  
+  🔗 [https://spring-student-management-api-production.up.railway.app](https://spring-student-management-api-production.up.railway.app)
+
+---
 
 ---
 
 ## Features
 
-* User registration and login with JWT authentication.
-* Role-based access: `ADMIN` and `STUDENT`.
-* CRUD operations for Students, Courses, and Enrollments.
-* Validation and error handling.
-* Swagger OpenAPI documentation for easy exploration.
-* Deployed on **Railway** for live access.
+- User registration and login with JWT authentication.
+- Role-based access: `ADMIN` and `STUDENT`.
+- CRUD operations for Students, Courses, and Enrollments.
+- Validation and error handling.
+- Swagger OpenAPI documentation for easy exploration.
+- Deployed on **Railway** for live access.
 
 ---
 
 ## Tech Stack
 
-* **Backend:** Java 17, Spring Boot
-* **Security:** Spring Security, JWT
-* **Database:** MySQL
-* **ORM:** Hibernate / JPA
-* **API Documentation:** Springdoc OpenAPI (Swagger UI)
-* **Hosting/Deployment:** Railway
-* **Testing:** Postman
+- **Backend:** Java 17, Spring Boot
+- **Security:** Spring Security, JWT
+- **Database:** MySQL
+- **ORM:** Hibernate / JPA
+- **API Documentation:** Springdoc OpenAPI (Swagger UI)
+- **Hosting/Deployment:** Railway
+- **Testing:** Postman
 
 ---
 
 ## Architecture & Design
 
-* **Layers:** Controller → Service → Repository
-* **DTOs:** Used for request/response separation
-* **Database:** Relational schema with users, students, courses, enrollments
-* **JWT Security:** Token-based authentication; tokens stored in Postman variables for testing
-* **Error Handling:** Centralized exception handler for consistent API responses
+- **Layers:** Controller → Service → Repository
+- **DTOs:** Used for request/response separation
+- **Database:** Relational schema with users, students, courses, enrollments
+- **JWT Security:** Token-based authentication; tokens stored in Postman variables for testing
+- **Error Handling:** Centralized exception handler for consistent API responses
 
 ---
 
@@ -62,7 +72,7 @@ cd spring-student-management-api
 2. **Set environment variables** in a `.env` file or directly in `application-dev.yml`:
 
 ```properties
-DATABASE_URL=your_database_url(ex: jdbc:mysql://localhost:3306)
+DATABASE_URL=your_database_url(ex: localhost:3306)
 DATABASE_USER=your_username
 DATABASE_PASS=your_password
 JWT_SECRET=your_jwt_secret_key
@@ -83,7 +93,7 @@ mvn spring-boot:run
 
 Explore endpoints and models via Swagger OpenAPI:
 
-📄 **Swagger UI:** [Click here](https://spring-student-management-api-production.up.railway.app/swagger-ui/index.html)  
+📄 **Swagger UI:** [Click here](https://spring-student-management-api-production.up.railway.app/swagger-ui/index.html)
 
 > Use this link to understand all available endpoints, request/response formats, and authentication requirements.
 
@@ -93,18 +103,18 @@ Explore endpoints and models via Swagger OpenAPI:
 
 The API uses **JWT-based authentication**. The provided Postman collection handles authentication automatically:
 
-* Use the `/auth/register` endpoint to create a new user if desired.
-* The database is **pre-populated** with 10 test user accounts, including **1 admin**. You can use these accounts for testing without registering new users.
+- Use the `/auth/register` endpoint to create a new user if desired.
+- The database is **pre-populated** with 10 test user accounts, including **1 admin**. You can use these accounts for testing without registering new users.
 
 ### Example Test Accounts
 
-| Role    | Email                                               | Password   |
-| ------- | --------------------------------------------------- | ---------- |
-| Admin   | [alice@example.com](mailto:admin@example.com)       | password1  |
-| Student | [bob@example.com](mailto:student1@example.com)      | password2  |
+| Role    | Email                                          | Password  |
+| ------- | ---------------------------------------------- | --------- |
+| Admin   | [alice@example.com](mailto:admin@example.com)  | password1 |
+| Student | [bob@example.com](mailto:student1@example.com) | password2 |
 
-* Log in via `/auth/login` — the JWT token is automatically captured and stored in a Postman collection variable.
-* All requests in the collection that require authentication will automatically use this token.
+- Log in via `/auth/login` — the JWT token is automatically captured and stored in a Postman collection variable.
+- All requests in the collection that require authentication will automatically use this token.
 
 This setup allows you to explore and test the API immediately using the provided accounts, without manually setting headers or tokens.
 
