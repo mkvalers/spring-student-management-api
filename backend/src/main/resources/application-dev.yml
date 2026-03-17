@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: ${DATABASE_URL}/school_api_db?createDatabaseIfNotExist=true
+    url: jdbc:mysql://${DATABASE_URL}/school_api_db?createDatabaseIfNotExist=true
     username: ${DATABASE_USER}
     password: ${DATABASE_PASS}
   jpa:
