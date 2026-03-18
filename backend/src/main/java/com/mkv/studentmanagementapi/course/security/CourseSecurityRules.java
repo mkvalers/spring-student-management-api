@@ -11,9 +11,9 @@ import org.springframework.stereotype.Component;
 public class CourseSecurityRules implements SecurityRules {
     @Override
     public void configure(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry registry) {
-        registry.requestMatchers(HttpMethod.GET, "/courses", "/courses/{id}").hasAnyRole(Roles.STUDENT.name(), Roles.ADMIN.name())
+        registry.requestMatchers(HttpMethod.GET, "/courses", "/courses/{courseCode}").hasAnyRole(Roles.STUDENT.name(), Roles.ADMIN.name())
                 .requestMatchers(HttpMethod.POST, "/courses").hasRole(Roles.ADMIN.name())
-                .requestMatchers(HttpMethod.PUT, "/courses/{id}").hasRole(Roles.ADMIN.name())
-                .requestMatchers(HttpMethod.DELETE, "/courses/{id}").hasRole(Roles.ADMIN.name());;
+                .requestMatchers(HttpMethod.PUT, "/courses/{courseCode}").hasRole(Roles.ADMIN.name())
+                .requestMatchers(HttpMethod.DELETE, "/courses/{courseCode}").hasRole(Roles.ADMIN.name());
     }
 }

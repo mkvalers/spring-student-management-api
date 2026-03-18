@@ -21,46 +21,46 @@ public class CourseController {
     private final CourseService courseService;
 
     @GetMapping
-    @Operation(summary = "Retrieve a list of all available courses. Both Student and Admin can access this." )
+    @Operation(summary = "Retrieve a list of all available courses. Both Student and Admin can access this.")
     public Iterable<CourseResponse> getAllCourses() {
         return courseService.getAllCourses();
     }
 
-    @GetMapping("/{courseId}")
-    @Operation(summary = "Retrieve detailed information about a specific course by its ID. Both Student and Admin can access this." )
-    public CourseResponse getCourseById(@PathVariable Long courseId) {
-        return courseService.getCourseById(courseId);
+    @GetMapping("/{courseCode}")
+    @Operation(summary = "Retrieve a course by its code. Students see basic info, Admins see full info with enrolled students.")
+    public CourseResponse getCourseByCode(@PathVariable String courseCode) {
+        return courseService.getCourseByCode(courseCode);
     }
 
     @PostMapping
-    @Operation(summary = "Create a new course. Only Admin can access this." )
+    @Operation(summary = "Create a new course. Only Admin can access this.")
     public ResponseEntity<CourseResponse> createCourse(
-        @Valid @RequestBody CreateCourseRequest request,
-        UriComponentsBuilder builder
+            @Valid @RequestBody CreateCourseRequest request,
+            UriComponentsBuilder builder
     ) {
         var course = courseService.createCourse(request);
         var uri = builder
-                .path("/courses/{id}")
-                .buildAndExpand(course.getId())
+                .path("/courses/{courseCode}")
+                .buildAndExpand(course.getCourseCode())
                 .toUri();
 
         return ResponseEntity.created(uri).body(course);
     }
 
-    @PutMapping("/{id}")
-    @Operation(summary = "Update an existing course by its ID. Only Admin can access this." )
+    @PutMapping("/{courseCode}")
+    @Operation(summary = "Update an existing course by its code. Only Admin can access this.")
     public ResponseEntity<Void> updateCourse(
-        @PathVariable Long id,
-        @Valid @RequestBody UpdateCourseRequest request
+            @PathVariable String courseCode,
+            @Valid @RequestBody UpdateCourseRequest request
     ) {
-        courseService.updateCourse(id, request);
+        courseService.updateCourse(courseCode, request);
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/{id}")
-    @Operation(summary = "Delete a course by its ID. Only Admin can access this." )
-    public ResponseEntity<Void> deleteCourse(@PathVariable Long id) {
-        courseService.deleteCourse(id);
+    @DeleteMapping("/{courseCode}")
+    @Operation(summary = "Delete a course by its code. Only Admin can access this.")
+    public ResponseEntity<Void> deleteCourse(@PathVariable String courseCode) {
+        courseService.deleteCourse(courseCode);
         return ResponseEntity.noContent().build();
     }
 }
