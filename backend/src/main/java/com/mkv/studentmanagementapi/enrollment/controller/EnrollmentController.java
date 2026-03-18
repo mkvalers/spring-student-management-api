@@ -1,6 +1,8 @@
 package com.mkv.studentmanagementapi.enrollment.controller;
 
-import com.mkv.studentmanagementapi.enrollment.dto.*;
+import com.mkv.studentmanagementapi.enrollment.dto.EnrollmentDto;
+import com.mkv.studentmanagementapi.enrollment.dto.EnrollmentRequest;
+import com.mkv.studentmanagementapi.enrollment.dto.EnrollmentResponse;
 import com.mkv.studentmanagementapi.enrollment.service.EnrollmentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -19,14 +21,8 @@ public class EnrollmentController {
 
     @GetMapping("/me")
     @Operation(summary = "Get enrollments for the logged-in student.")
-    public Iterable<EnrollmentResponse> getLoggedInStudentEnrollments() {
+    public Iterable<EnrollmentResponse> getMyEnrollments() {
         return enrollmentService.getLoggedInStudentEnrollments();
-    }
-
-    @GetMapping("/students/{studentId}")
-    @Operation(summary = "Get enrollments for a specific student by ID. Only Admin can access this.")
-    public StudentEnrollmentDto getStudentEnrollments(@PathVariable Long studentId) {
-        return enrollmentService.getStudentEnrollments(studentId);
     }
 
     @PostMapping
@@ -40,12 +36,6 @@ public class EnrollmentController {
     public ResponseEntity<Void> dropCourse(@PathVariable Long enrollmentId) {
         enrollmentService.dropCourse(enrollmentId);
         return ResponseEntity.noContent().build();
-    }
-
-    @GetMapping("/courses/{courseId}")
-    @Operation(summary = "Get students enrolled in a specific course by ID. Only Admin can access this.")
-    public StudentsInCourseResponse getStudentsEnrolledInCourse(@PathVariable Long courseId) {
-        return enrollmentService.getStudentsInCourse(courseId);
     }
 
 }

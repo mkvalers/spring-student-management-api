@@ -13,7 +13,6 @@ import javax.crypto.SecretKey;
 public class JwtConfig {
     private String secret;
     private int accessTokenExpiration;
-    private int refreshTokenExpiration;
 
     public SecretKey getSecretKey() {
         return Keys.hmacShaKeyFor(secret.getBytes());

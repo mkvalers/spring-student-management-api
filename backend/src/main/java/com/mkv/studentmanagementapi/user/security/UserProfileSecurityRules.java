@@ -11,7 +11,9 @@ import org.springframework.stereotype.Component;
 public class UserProfileSecurityRules implements SecurityRules {
     @Override
     public void configure(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry registry) {
-        registry.requestMatchers(HttpMethod.GET, "/users/me").hasAnyRole(Roles.ADMIN.name(), Roles.STUDENT.name())
-                .requestMatchers(HttpMethod.PUT, "/users/me").hasRole(Roles.STUDENT.name());
+        registry.requestMatchers(HttpMethod.GET, "/users/me").hasRole(Roles.STUDENT.name())
+                .requestMatchers(HttpMethod.PUT, "/users/me").hasRole(Roles.STUDENT.name())
+                .requestMatchers(HttpMethod.GET, "/users/admin/me").hasRole(Roles.ADMIN.name())
+                .requestMatchers(HttpMethod.PUT, "/users/admin/me").hasRole(Roles.ADMIN.name());
     }
 }

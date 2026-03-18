@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class RegistrationRequest {
 
-    @Email
+    @Email(message = "Invalid email format.")
     @NotBlank(message = "Email is required.")
     private String email;
 
@@ -17,16 +17,18 @@ public class RegistrationRequest {
 
     @JsonProperty("first_name")
     @NotBlank(message = "First name is required.")
+    @Size(max = 50, message = "First name must not exceed 50 characters.")
     private String firstName;
 
     @JsonProperty("last_name")
     @NotBlank(message = "Last name is required.")
+    @Size(max = 50, message = "Last name must not exceed 50 characters.")
     private String lastName;
 
     @NotNull(message = "Year level is required.")
     @JsonProperty("year_level")
-    @Min(1) @Max(6)
+    @Min(value = 1, message = "Year level must be at least 1.")
+    @Max(value = 4, message = "Year level must be at most 4.")
     private Integer yearLevel;
-
 
 }

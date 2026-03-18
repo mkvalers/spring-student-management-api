@@ -5,7 +5,6 @@ import com.mkv.studentmanagementapi.student.dto.StudentResponse;
 import com.mkv.studentmanagementapi.user.dto.UpdateInfoRequest;
 import com.mkv.studentmanagementapi.student.entity.Student;
 import org.mapstruct.*;
-import org.springframework.data.jpa.repository.EntityGraph;
 
 @Mapper(componentModel = "spring")
 public interface StudentMapper {
@@ -21,9 +20,7 @@ public interface StudentMapper {
     StudentDto toStudentDto(Student student);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    @Mappings({
-        @Mapping(target = "user.email", source = "email"),
-        @Mapping(target = "user.password", source = "password")
-    })
+    @Mapping(target = "user.email", source = "email")
     void update(UpdateInfoRequest request, @MappingTarget Student student);
+
 }
