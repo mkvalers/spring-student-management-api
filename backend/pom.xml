@@ -150,15 +150,15 @@
                     </excludes>
                 </configuration>
             </plugin>
-<!--            <plugin>-->
-<!--                <groupId>org.flywaydb</groupId>-->
-<!--                <artifactId>flyway-maven-plugin</artifactId>-->
-<!--                <configuration>-->
-<!--                    <url>${env.DATABASE_URL}</url>-->
-<!--                    <user>${env.DATABASE_USER}</user>-->
-<!--                    <password>${env.DATABASE_PASS}</password>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <configuration>
+                    <url>localhost:3307</url>
+                    <user>root</user>
+                    <password>xmkvvv</password>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
