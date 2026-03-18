@@ -1,6 +1,5 @@
 package com.mkv.studentmanagementapi.authentication.service.jwt;
 
-
 import com.mkv.studentmanagementapi.common.config.JwtConfig;
 import com.mkv.studentmanagementapi.user.entity.User;
 import io.jsonwebtoken.Claims;
@@ -22,15 +21,11 @@ public class JwtService {
         return generateToken(user, jwtConfig.getAccessTokenExpiration());
     }
 
-    public Jwt generateRefreshToken(User user) {
-        return generateToken(user, jwtConfig.getRefreshTokenExpiration());
-    }
-
     public Jwt parseToken(String token) {
-        try{
+        try {
             var claims = getClaims(token);
             return new Jwt(claims, jwtConfig.getSecretKey());
-        }catch (JwtException e){
+        } catch (JwtException | IllegalArgumentException e) {
             return null;
         }
     }

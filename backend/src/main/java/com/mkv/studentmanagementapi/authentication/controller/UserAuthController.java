@@ -7,7 +7,6 @@ import com.mkv.studentmanagementapi.user.dto.RegistrationRequest;
 import com.mkv.studentmanagementapi.user.dto.RegistrationResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -36,27 +35,9 @@ public class UserAuthController {
     }
 
     @PostMapping("/login")
-    @Operation(summary = "Authenticates a user and returns JWT tokens upon successful login.")
-    public JwtResponse login(
-        @Valid @RequestBody LoginUserRequest request,
-        HttpServletResponse response
-    ) {
-        return userAuthService.login(request, response);
-    }
-
-    @PostMapping("/logout")
-    @Operation(summary = "Logs out the currently authenticated user by clearing the refresh token cookie.")
-    public ResponseEntity<Void> logout(HttpServletResponse response) {
-        userAuthService.logout(response);
-        return ResponseEntity.noContent().build();
-    }
-
-    @PostMapping("/refresh")
-    @Operation(summary = "Refreshes the JWT tokens using the provided refresh token cookie.")
-    public JwtResponse refresh(
-        @CookieValue(value = "refreshToken") String refreshToken
-    ) {
-        return userAuthService.refresh(refreshToken);
+    @Operation(summary = "Authenticates a user and returns a JWT token upon successful login.")
+    public JwtResponse login(@Valid @RequestBody LoginUserRequest request) {
+        return userAuthService.login(request);
     }
 
 }
