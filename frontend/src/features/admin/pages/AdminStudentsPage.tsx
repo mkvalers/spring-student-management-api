@@ -4,40 +4,39 @@ import StudentFilters from '../components/StudentFilters';
 import StudentTable from '../components/StudentTable';
 import StudentTableSkeleton from '../components/StudentTableSkeleton';
 
-const PAGE_SIZE = 10;
-
 export default function AdminStudentsPage() {
    const [firstName, setFirstName] = useState('');
    const [lastName, setLastName] = useState('');
    const [yearLevel, setYearLevel] = useState('');
-   const [page, setPage] = useState(0);
 
    const filters = {
       firstName: firstName || undefined,
       lastName: lastName || undefined,
       yearLevel: yearLevel ? parseInt(yearLevel) : undefined,
-      page,
-      size: PAGE_SIZE,
    };
 
-   const { data: students, isLoading, error } = useStudents(filters);
+   const { 
+      data, 
+      isLoading, 
+      error, 
+      fetchNextPage, 
+      hasNextPage, 
+      isFetchingNextPage 
+   } = useStudents(filters);
 
    const handleClearFilters = () => {
       setFirstName('');
       setLastName('');
       setYearLevel('');
-      setPage(0);
    };
 
-   const handlePageChange = (newPage: number) => {
-      setPage(newPage);
-   };
+   const students = data?.pages.flatMap(page => page) ?? [];
 
    return (
-      <div className="space-y-6 md:space-y-8">
+      <div className="h-full flex flex-col space-y-6 md:space-y-8">
          <div>
-            <h1 className="text-2xl md:text-3xl font-bold">Students</h1>
-            <p className="text-sm md:text-base text-muted-foreground">Browse and filter student records</p>
+            <h1 className="text-2xl md:text-3xl font-bold tracking-tight">Students</h1>
+            <p className="text-sm md:text-base text-muted-foreground mt-1">Browse and filter student records</p>
          </div>
 
          <StudentFilters
@@ -46,15 +45,12 @@ export default function AdminStudentsPage() {
             yearLevel={yearLevel}
             onFirstNameChange={(value) => {
                setFirstName(value);
-               setPage(0);
             }}
             onLastNameChange={(value) => {
                setLastName(value);
-               setPage(0);
             }}
             onYearLevelChange={(value) => {
                setYearLevel(value);
-               setPage(0);
             }}
             onClear={handleClearFilters}
          />
@@ -66,9 +62,9 @@ export default function AdminStudentsPage() {
          {students && (
             <StudentTable
                students={students}
-               page={page}
-               pageSize={PAGE_SIZE}
-               onPageChange={handlePageChange}
+               onLoadMore={fetchNextPage}
+               hasMore={hasNextPage}
+               isLoadingMore={isFetchingNextPage}
             />
          )}
       </div>
