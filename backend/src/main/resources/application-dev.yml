@@ -3,5 +3,9 @@ spring:
     url: jdbc:mysql://${DATABASE_URL}/school_api_db?createDatabaseIfNotExist=true
     username: ${DATABASE_USER}
     password: ${DATABASE_PASS}
+  frontend:
+    vite_default_url: ${VITE_DEFAULT_URL}
+    react_default_url: ${REACT_DEFAULT_URL}
   jpa:
     show-sql: true
+

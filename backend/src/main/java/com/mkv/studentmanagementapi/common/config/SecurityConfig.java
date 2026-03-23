@@ -2,7 +2,8 @@ package com.mkv.studentmanagementapi.common.config;
 
 import com.mkv.studentmanagementapi.common.filters.JwtAuthenticationFilter;
 import com.mkv.studentmanagementapi.common.security.SecurityRules;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
@@ -25,8 +26,14 @@ import java.util.List;
 
 @Configuration
 @EnableWebSecurity
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class SecurityConfig {
+
+    @Value("${spring.frontend.vite_default_url}")
+    private String VITE_DEFAULT_URL;
+
+    @Value("${spring.frontend.react_default_url}")
+    private String REACT_DEFAULT_URL;
 
     private final UserDetailsService userDetailsService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
@@ -52,10 +59,24 @@ public class SecurityConfig {
     }
 
     @Bean
+    public org.springframework.web.cors.CorsConfigurationSource corsConfigurationSource() {
+        var configuration = new org.springframework.web.cors.CorsConfiguration();
+        configuration.setAllowedOrigins(List.of(VITE_DEFAULT_URL, REACT_DEFAULT_URL));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setAllowCredentials(true);
+
+        var source = new org.springframework.web.cors.UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
+    @Bean
     public SecurityFilterChain securityFilterChain (HttpSecurity http) throws Exception {
         http
             .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .csrf(AbstractHttpConfigurer::disable)
+            .cors(cors -> cors.configure(http))
             .authorizeHttpRequests(c -> {
                         featuredSecurityRules.forEach(r -> r.configure(c));
                         c.anyRequest().permitAll();
