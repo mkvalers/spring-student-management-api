@@ -1,6 +1,5 @@
-import { Navigate } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import useAuthStore from '@/features/auth/store/authStore';
-import MainLayout from './MainLayout';
 import type { Role } from '@/types';
 
 interface ProtectedRouteProps {
@@ -16,5 +15,5 @@ export default function ProtectedRoute({ allowedRole }: ProtectedRouteProps) {
       return <Navigate to={role === 'ADMIN' ? '/admin/dashboard' : '/student/dashboard'} replace />;
    }
 
-   return <MainLayout />;
+   return <Outlet />;
 }
