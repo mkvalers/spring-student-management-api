@@ -80,7 +80,7 @@ export default function MainLayout() {
                   >
                      <HiMenu className="h-6 w-6" />
                   </button>
-                  <span className="text-xs md:text-sm text-muted-foreground truncate max-w-[120px] sm:max-w-none">
+                  <span className="text-xs md:text-sm text-muted-foreground truncate max-w-30 sm:max-w-none">
                      {user?.email || 'User'}
                   </span>
                   <span className="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary">
