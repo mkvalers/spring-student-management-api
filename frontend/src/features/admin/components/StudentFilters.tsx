@@ -25,7 +25,7 @@ export default function StudentFilters({
    return (
       <Card>
          <CardContent className="pt-6">
-            <div className="grid gap-4 md:grid-cols-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
                <div className="space-y-2">
                   <Label htmlFor="firstName">First Name</Label>
                   <Input
@@ -33,6 +33,7 @@ export default function StudentFilters({
                      placeholder="Filter by first name"
                      value={firstName}
                      onChange={(e) => onFirstNameChange(e.target.value)}
+                     className="h-11"
                   />
                </div>
                <div className="space-y-2">
@@ -42,6 +43,7 @@ export default function StudentFilters({
                      placeholder="Filter by last name"
                      value={lastName}
                      onChange={(e) => onLastNameChange(e.target.value)}
+                     className="h-11"
                   />
                </div>
                <div className="space-y-2">
@@ -54,13 +56,14 @@ export default function StudentFilters({
                      placeholder="1-4"
                      value={yearLevel}
                      onChange={(e) => onYearLevelChange(e.target.value)}
+                     className="h-11"
                   />
                </div>
-               <div className="flex items-end">
+               <div className="flex items-end sm:col-span-2 md:col-span-1">
                   <Button
                      variant="outline"
                      onClick={onClear}
-                     className="w-full"
+                     className="w-full h-11"
                   >
                      Clear Filters
                   </Button>

@@ -7,10 +7,10 @@ export default function CoursesPage() {
 
    if (isLoading) {
       return (
-         <div className="space-y-6">
+         <div className="space-y-6 md:space-y-8">
             <div>
-               <h1 className="text-3xl font-bold">Available Courses</h1>
-               <p className="text-muted-foreground">Browse and enroll in courses</p>
+               <h1 className="text-2xl md:text-3xl font-bold">Available Courses</h1>
+               <p className="text-sm md:text-base text-muted-foreground">Browse and enroll in courses</p>
             </div>
             <p className="text-muted-foreground">Loading courses...</p>
          </div>
@@ -19,10 +19,10 @@ export default function CoursesPage() {
 
    if (error) {
       return (
-         <div className="space-y-6">
+         <div className="space-y-6 md:space-y-8">
             <div>
-               <h1 className="text-3xl font-bold">Available Courses</h1>
-               <p className="text-muted-foreground">Browse and enroll in courses</p>
+               <h1 className="text-2xl md:text-3xl font-bold">Available Courses</h1>
+               <p className="text-sm md:text-base text-muted-foreground">Browse and enroll in courses</p>
             </div>
             <p className="text-destructive">Failed to load courses. Please try again.</p>
          </div>
@@ -31,10 +31,10 @@ export default function CoursesPage() {
 
    if (!courses || courses.length === 0) {
       return (
-         <div className="space-y-6">
+         <div className="space-y-6 md:space-y-8">
             <div>
-               <h1 className="text-3xl font-bold">Available Courses</h1>
-               <p className="text-muted-foreground">Browse and enroll in courses</p>
+               <h1 className="text-2xl md:text-3xl font-bold">Available Courses</h1>
+               <p className="text-sm md:text-base text-muted-foreground">Browse and enroll in courses</p>
             </div>
             <p className="text-muted-foreground">No courses available at the moment.</p>
          </div>
@@ -42,12 +42,12 @@ export default function CoursesPage() {
    }
 
    return (
-      <div className="space-y-6">
+      <div className="space-y-6 md:space-y-8">
          <div>
-            <h1 className="text-3xl font-bold">Available Courses</h1>
-            <p className="text-muted-foreground">Browse and enroll in courses</p>
+            <h1 className="text-2xl md:text-3xl font-bold">Available Courses</h1>
+            <p className="text-sm md:text-base text-muted-foreground">Browse and enroll in courses</p>
          </div>
-         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {courses.map((course) => (
                <CourseCard
                   key={course.id}

@@ -47,10 +47,10 @@ export default function AdminCoursesPage() {
 
    if (isLoading) {
       return (
-         <div className="space-y-6">
+         <div className="space-y-6 md:space-y-8">
             <div>
-               <h1 className="text-3xl font-bold">Manage Courses</h1>
-               <p className="text-muted-foreground">Create, edit, and delete courses</p>
+               <h1 className="text-2xl md:text-3xl font-bold">Manage Courses</h1>
+               <p className="text-sm md:text-base text-muted-foreground">Create, edit, and delete courses</p>
             </div>
             <p className="text-muted-foreground">Loading courses...</p>
          </div>
@@ -59,10 +59,10 @@ export default function AdminCoursesPage() {
 
    if (error) {
       return (
-         <div className="space-y-6">
+         <div className="space-y-6 md:space-y-8">
             <div>
-               <h1 className="text-3xl font-bold">Manage Courses</h1>
-               <p className="text-muted-foreground">Create, edit, and delete courses</p>
+               <h1 className="text-2xl md:text-3xl font-bold">Manage Courses</h1>
+               <p className="text-sm md:text-base text-muted-foreground">Create, edit, and delete courses</p>
             </div>
             <p className="text-destructive">Failed to load courses. Please try again.</p>
          </div>
@@ -70,11 +70,11 @@ export default function AdminCoursesPage() {
    }
 
    return (
-      <div className="space-y-6">
-         <div className="flex items-center justify-between">
+      <div className="space-y-6 md:space-y-8">
+         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-               <h1 className="text-3xl font-bold">Manage Courses</h1>
-               <p className="text-muted-foreground">Create, edit, and delete courses</p>
+               <h1 className="text-2xl md:text-3xl font-bold">Manage Courses</h1>
+               <p className="text-sm md:text-base text-muted-foreground">Create, edit, and delete courses</p>
             </div>
             {!showForm && !editingCourse && (
                <Button onClick={() => setShowForm(true)}>New Course</Button>
@@ -99,7 +99,7 @@ export default function AdminCoursesPage() {
          )}
 
          {!showForm && !editingCourse && (
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
                {courses?.map((course) => (
                   <CourseCard
                      key={course.id}

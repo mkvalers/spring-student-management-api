@@ -26,7 +26,8 @@ export default function StudentTable({ students, page, pageSize, onPageChange }:
 
    return (
       <div className="space-y-4">
-         <Card>
+         {/* Desktop Table View */}
+         <Card className="hidden md:block">
             <CardContent className="p-0">
                <div className="overflow-x-auto">
                   <table className="w-full">
@@ -54,6 +55,27 @@ export default function StudentTable({ students, page, pageSize, onPageChange }:
                </div>
             </CardContent>
          </Card>
+
+         {/* Mobile Card View */}
+         <div className="md:hidden space-y-3">
+            {students.map((student) => (
+               <Card key={student.id}>
+                  <CardContent className="p-4">
+                     <div className="space-y-2">
+                        <div className="flex items-start justify-between">
+                           <div>
+                              <p className="font-medium text-sm">{student.full_name}</p>
+                              <p className="text-xs text-muted-foreground">ID: {student.id}</p>
+                           </div>
+                           <span className="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary">
+                              Year {student.year_level}
+                           </span>
+                        </div>
+                     </div>
+                  </CardContent>
+               </Card>
+            ))}
+         </div>
 
          <div className="flex items-center justify-between">
             <p className="text-sm text-muted-foreground">

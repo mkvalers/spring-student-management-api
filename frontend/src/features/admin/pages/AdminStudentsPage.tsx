@@ -33,10 +33,10 @@ export default function AdminStudentsPage() {
    };
 
    return (
-      <div className="space-y-6">
+      <div className="space-y-6 md:space-y-8">
          <div>
-            <h1 className="text-3xl font-bold">Students</h1>
-            <p className="text-muted-foreground">Browse and filter student records</p>
+            <h1 className="text-2xl md:text-3xl font-bold">Students</h1>
+            <p className="text-sm md:text-base text-muted-foreground">Browse and filter student records</p>
          </div>
 
          <StudentFilters

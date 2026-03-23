@@ -6,10 +6,10 @@ export default function AdminDashboardPage() {
 
    if (isLoading) {
       return (
-         <div className="space-y-6">
+         <div className="space-y-6 md:space-y-8">
             <div>
-               <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-               <p className="text-muted-foreground">Welcome back, Administrator</p>
+               <h1 className="text-2xl md:text-3xl font-bold">Admin Dashboard</h1>
+               <p className="text-sm md:text-base text-muted-foreground">Welcome back, Administrator</p>
             </div>
             <Card>
                <CardContent className="p-6">
@@ -22,10 +22,10 @@ export default function AdminDashboardPage() {
 
    if (error) {
       return (
-         <div className="space-y-6">
+         <div className="space-y-6 md:space-y-8">
             <div>
-               <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-               <p className="text-muted-foreground">Welcome back, Administrator</p>
+               <h1 className="text-2xl md:text-3xl font-bold">Admin Dashboard</h1>
+               <p className="text-sm md:text-base text-muted-foreground">Welcome back, Administrator</p>
             </div>
             <Card>
                <CardContent className="p-6">
@@ -39,10 +39,10 @@ export default function AdminDashboardPage() {
    if (!profile) return null;
 
    return (
-      <div className="space-y-6">
+      <div className="space-y-6 md:space-y-8">
          <div>
-            <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-            <p className="text-muted-foreground">Welcome back, Administrator</p>
+            <h1 className="text-2xl md:text-3xl font-bold">Admin Dashboard</h1>
+            <p className="text-sm md:text-base text-muted-foreground">Welcome back, Administrator</p>
          </div>
          <Card className="max-w-2xl">
             <CardHeader>
