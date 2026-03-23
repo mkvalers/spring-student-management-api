@@ -10,6 +10,8 @@ import java.util.List;
 @Data
 public class CourseResponse {
 
+    private Long id;
+
     @JsonProperty("course_code")
     private String courseCode;
 

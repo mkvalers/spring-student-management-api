@@ -1,17 +1,20 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import studentService from '@/features/student/services/studentService';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import studentService from '../services/studentService';
 
-export const useEnrollments = () =>
-   useQuery({
+export function useEnrollments() {
+   return useQuery({
       queryKey: ['student', 'enrollments'],
       queryFn: studentService.getMyEnrollments,
    });
+}
 
-export const useDropCourse = () => {
+export function useDropCourse() {
    const queryClient = useQueryClient();
 
    return useMutation({
       mutationFn: (enrollmentId: number) => studentService.dropCourse(enrollmentId),
-      onSuccess: () => queryClient.invalidateQueries({ queryKey: ['student', 'enrollments'] }),
+      onSuccess: () => {
+         queryClient.invalidateQueries({ queryKey: ['student', 'enrollments'] });
+      },
    });
-};
+}

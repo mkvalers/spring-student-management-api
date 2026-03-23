@@ -1,10 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import studentService from '@/features/student/services/studentService';
+import studentService from '../services/studentService';
 
-const useStudentProfile = () =>
-   useQuery({
+export function useStudentProfile() {
+   return useQuery({
       queryKey: ['student', 'profile'],
       queryFn: studentService.getMyProfile,
    });
-
-export default useStudentProfile;
+}

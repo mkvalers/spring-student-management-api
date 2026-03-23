@@ -1,38 +1,75 @@
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { useEnrollments, useDropCourse } from '../hooks/useEnrollments';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { useEnrollments, useDropCourse } from '@/features/student/hooks/useEnrollments';
 
-const EnrolledCourses = () => {
-   const { data: enrollments, isPending } = useEnrollments();
-   const { mutate: drop, isPending: isDropping } = useDropCourse();
+export default function EnrolledCourses() {
+   const { data: enrollments, isLoading, error } = useEnrollments();
+   const { mutate: dropCourse, isPending } = useDropCourse();
 
-   if (isPending) return <p className="text-sm text-muted-foreground">Loading enrollments...</p>;
+   if (isLoading) {
+      return (
+         <Card>
+            <CardContent className="p-6">
+               <p className="text-muted-foreground">Loading enrollments...</p>
+            </CardContent>
+         </Card>
+      );
+   }
+
+   if (error) {
+      return (
+         <Card>
+            <CardContent className="p-6">
+               <p className="text-destructive">Failed to load enrollments</p>
+            </CardContent>
+         </Card>
+      );
+   }
+
+   if (!enrollments || enrollments.length === 0) {
+      return (
+         <Card>
+            <CardHeader>
+               <CardTitle>My Enrolled Courses</CardTitle>
+            </CardHeader>
+            <CardContent>
+               <p className="text-muted-foreground">You are not enrolled in any courses yet.</p>
+            </CardContent>
+         </Card>
+      );
+   }
 
    return (
       <Card>
          <CardHeader>
-            <CardTitle>Enrolled Courses</CardTitle>
+            <CardTitle>My Enrolled Courses</CardTitle>
          </CardHeader>
-         <CardContent className="flex flex-col gap-2">
-            {!enrollments?.length && (
-               <p className="text-sm text-muted-foreground">No enrolled courses yet.</p>
-            )}
-            {enrollments?.map((enrollment) => (
-               <div key={enrollment.enrollment_id} className="flex items-center justify-between rounded-lg border border-foreground/10 px-4 py-3 text-sm">
-                  <span>{enrollment.course_name}</span>
+         <CardContent className="space-y-3">
+            {enrollments.map((enrollment) => (
+               <div
+                  key={enrollment.enrollment_id}
+                  className="flex items-center justify-between rounded-lg border border-border p-4"
+               >
+                  <div>
+                     <p className="font-medium">{enrollment.course_name}</p>
+                     <p className="text-sm text-muted-foreground">Course ID: {enrollment.course_id}</p>
+                  </div>
                   <Button
                      variant="destructive"
                      size="sm"
-                     disabled={isDropping}
-                     onClick={() => drop(enrollment.enrollment_id)}
+                     onClick={() => dropCourse(enrollment.enrollment_id)}
+                     disabled={isPending}
                   >
-                     Drop
+                     {isPending ? 'Dropping...' : 'Drop'}
                   </Button>
                </div>
             ))}
          </CardContent>
+         <CardFooter>
+            <p className="text-sm text-muted-foreground">
+               Total: {enrollments.length} course{enrollments.length !== 1 ? 's' : ''}
+            </p>
+         </CardFooter>
       </Card>
    );
-};
-
-export { EnrolledCourses };
+}

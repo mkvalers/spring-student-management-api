@@ -1,4 +1,6 @@
 spring:
   datasource:
     url: ${SPRING_DATASOURCE_URL}
+  frontend:
+    allowed-origins: ${FRONTEND_ALLOWED_ORIGINS}
 websiteUrl: ${WEBSITE_URL}

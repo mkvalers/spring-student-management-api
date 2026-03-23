@@ -2,83 +2,152 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Link } from 'react-router-dom';
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
+import { useRegister } from '../hooks/useAuth';
+import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Button } from '@/components/ui/button';
-import { useRegister } from '@/features/auth/hooks/useAuth';
+import {
+   Card,
+   CardContent,
+   CardDescription,
+   CardFooter,
+   CardHeader,
+   CardTitle,
+} from '@/components/ui/card';
 
-const schema = z.object({
-   email: z.string().email('Invalid email format.'),
-   password: z.string().min(8, 'Password must be at least 8 characters.').max(21, 'Password must not exceed 21 characters.'),
-   first_name: z.string().min(1, 'First name is required.').max(50, 'First name must not exceed 50 characters.'),
-   last_name: z.string().min(1, 'Last name is required.').max(50, 'Last name must not exceed 50 characters.'),
-   year_level: z.number().min(1, 'Year level must be at least 1.').max(4, 'Year level must be at most 4.'),
+const registerSchema = z.object({
+   email: z.string().email('Invalid email address'),
+   password: z.string().min(6, 'Password must be at least 6 characters'),
+   first_name: z.string().min(1, 'First name is required'),
+   last_name: z.string().min(1, 'Last name is required'),
+   year_level: z
+      .number()
+      .min(1, 'Year level must be 1-4')
+      .max(4, 'Year level must be 1-4'),
 });
 
-type RegisterFormValues = z.infer<typeof schema>;
+type RegisterFormData = z.infer<typeof registerSchema>;
 
-const RegisterPage = () => {
-   const { mutate: register_, isPending, error } = useRegister();
-
-   const { register, handleSubmit, formState: { errors } } = useForm<RegisterFormValues>({
-      resolver: zodResolver(schema),
+export default function RegisterPage() {
+   const { mutate: register, isPending, error, isSuccess } = useRegister();
+   const {
+      register: registerField,
+      handleSubmit,
+      formState: { errors },
+   } = useForm<RegisterFormData>({
+      resolver: zodResolver(registerSchema),
    });
 
-   const onSubmit = (data: RegisterFormValues) => register_(data);
+   const onSubmit = (data: RegisterFormData) => {
+      register(data);
+   };
 
    return (
-      <div className="flex min-h-screen items-center justify-center">
-         <Card className="w-full max-w-sm">
+      <div className="flex min-h-screen items-center justify-center bg-background p-4">
+         <Card className="w-full max-w-md">
             <CardHeader>
-               <CardTitle>Create an account</CardTitle>
+               <CardTitle className="text-2xl">Register</CardTitle>
+               <CardDescription>Create a new student account</CardDescription>
             </CardHeader>
-            <CardContent>
-               <form id="register-form" onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-                  <div className="grid grid-cols-2 gap-3">
-                     <div className="flex flex-col gap-1.5">
-                        <Label htmlFor="first_name">First name</Label>
-                        <Input id="first_name" placeholder="John" {...register('first_name')} />
-                        {errors.first_name && <p className="text-xs text-destructive">{errors.first_name.message}</p>}
+            <form onSubmit={handleSubmit(onSubmit)}>
+               <CardContent className="space-y-4">
+                  {error && (
+                     <div className="rounded-md bg-destructive/10 p-3 text-sm text-destructive">
+                        {error.message ||
+                           'Registration failed. Please try again.'}
                      </div>
-                     <div className="flex flex-col gap-1.5">
-                        <Label htmlFor="last_name">Last name</Label>
-                        <Input id="last_name" placeholder="Doe" {...register('last_name')} />
-                        {errors.last_name && <p className="text-xs text-destructive">{errors.last_name.message}</p>}
+                  )}
+                  {isSuccess && (
+                     <div className="rounded-md bg-green-500/10 p-3 text-sm text-green-600">
+                        Registration successful! Redirecting to login...
+                     </div>
+                  )}
+                  <div className="grid grid-cols-2 gap-4">
+                     <div className="space-y-2">
+                        <Label htmlFor="first_name">First Name</Label>
+                        <Input
+                           id="first_name"
+                           placeholder="John"
+                           {...registerField('first_name')}
+                        />
+                        {errors.first_name && (
+                           <p className="text-sm text-destructive">
+                              {errors.first_name.message}
+                           </p>
+                        )}
+                     </div>
+                     <div className="space-y-2">
+                        <Label htmlFor="last_name">Last Name</Label>
+                        <Input
+                           id="last_name"
+                           placeholder="Doe"
+                           {...registerField('last_name')}
+                        />
+                        {errors.last_name && (
+                           <p className="text-sm text-destructive">
+                              {errors.last_name.message}
+                           </p>
+                        )}
                      </div>
                   </div>
-                  <div className="flex flex-col gap-1.5">
+                  <div className="space-y-2">
                      <Label htmlFor="email">Email</Label>
-                     <Input id="email" type="email" placeholder="you@example.com" {...register('email')} />
-                     {errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}
+                     <Input
+                        id="email"
+                        type="email"
+                        placeholder="you@example.com"
+                        {...registerField('email')}
+                     />
+                     {errors.email && (
+                        <p className="text-sm text-destructive">
+                           {errors.email.message}
+                        </p>
+                     )}
                   </div>
-                  <div className="flex flex-col gap-1.5">
+                  <div className="space-y-2">
                      <Label htmlFor="password">Password</Label>
-                     <Input id="password" type="password" placeholder="••••••••" {...register('password')} />
-                     {errors.password && <p className="text-xs text-destructive">{errors.password.message}</p>}
+                     <Input
+                        id="password"
+                        type="password"
+                        placeholder="••••••••"
+                        {...registerField('password')}
+                     />
+                     {errors.password && (
+                        <p className="text-sm text-destructive">
+                           {errors.password.message}
+                        </p>
+                     )}
                   </div>
-                  <div className="flex flex-col gap-1.5">
-                     <Label htmlFor="year_level">Year level</Label>
-                     <Input id="year_level" type="number" min={1} max={4} placeholder="1 – 4" {...register('year_level', { valueAsNumber: true })} />
-                     {errors.year_level && <p className="text-xs text-destructive">{errors.year_level.message}</p>}
+                  <div className="space-y-2">
+                     <Label htmlFor="year_level">Year Level (1-4)</Label>
+                     <Input
+                        id="year_level"
+                        type="number"
+                        min="1"
+                        max="4"
+                        placeholder="1"
+                        {...registerField('year_level')}
+                     />
+                     {errors.year_level && (
+                        <p className="text-sm text-destructive">
+                           {errors.year_level.message}
+                        </p>
+                     )}
                   </div>
-                  {error && <p className="text-xs text-destructive">Registration failed. Please try again.</p>}
-               </form>
-            </CardContent>
-            <CardFooter className="flex flex-col gap-3">
-               <Button type="submit" form="register-form" className="w-full" disabled={isPending}>
-                  {isPending ? 'Creating account...' : 'Create account'}
-               </Button>
-               <p className="text-sm text-muted-foreground">
-                  Already have an account?{' '}
-                  <Link to="/login" className="text-primary underline-offset-4 hover:underline">
-                     Sign in
-                  </Link>
-               </p>
-            </CardFooter>
+               </CardContent>
+               <CardFooter className="flex flex-col gap-4">
+                  <Button type="submit" className="w-full" disabled={isPending}>
+                     {isPending ? 'Registering...' : 'Register'}
+                  </Button>
+                  <p className="text-center text-sm text-muted-foreground">
+                     Already have an account?{' '}
+                     <Link to="/login" className="text-primary hover:underline">
+                        Login
+                     </Link>
+                  </p>
+               </CardFooter>
+            </form>
          </Card>
       </div>
    );
-};
-
-export default RegisterPage;
+}
