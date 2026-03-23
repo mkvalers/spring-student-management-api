@@ -15,6 +15,7 @@ export interface StudentDto {
 }
 
 export interface CourseResponse {
+   id: number;
    course_code: string;
    course_name: string;
    units: number;
