@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import ProtectedRoute from '@/components/ProtectedRoute';
+import MainLayout from '@/components/MainLayout';
 import useAuthStore from '@/features/auth/store/authStore';
 
 const LoginPage          = lazy(() => import('@/features/auth/pages/LoginPage'));
@@ -37,12 +38,17 @@ const router = createBrowserRouter([
       element: <ProtectedRoute allowedRole="STUDENT" />,
       children: [
          {
-            path: '/student/dashboard',
-            element: <Suspense fallback={fallback}><DashboardPage /></Suspense>,
-         },
-         {
-            path: '/courses',
-            element: <Suspense fallback={fallback}><CoursesPage /></Suspense>,
+            element: <MainLayout />,
+            children: [
+               {
+                  path: '/student/dashboard',
+                  element: <Suspense fallback={fallback}><DashboardPage /></Suspense>,
+               },
+               {
+                  path: '/courses',
+                  element: <Suspense fallback={fallback}><CoursesPage /></Suspense>,
+               },
+            ],
          },
       ],
    },
@@ -50,16 +56,21 @@ const router = createBrowserRouter([
       element: <ProtectedRoute allowedRole="ADMIN" />,
       children: [
          {
-            path: '/admin/dashboard',
-            element: <Suspense fallback={fallback}><AdminDashboardPage /></Suspense>,
-         },
-         {
-            path: '/admin/courses',
-            element: <Suspense fallback={fallback}><AdminCoursesPage /></Suspense>,
-         },
-         {
-            path: '/admin/students',
-            element: <Suspense fallback={fallback}><AdminStudentsPage /></Suspense>,
+            element: <MainLayout />,
+            children: [
+               {
+                  path: '/admin/dashboard',
+                  element: <Suspense fallback={fallback}><AdminDashboardPage /></Suspense>,
+               },
+               {
+                  path: '/admin/courses',
+                  element: <Suspense fallback={fallback}><AdminCoursesPage /></Suspense>,
+               },
+               {
+                  path: '/admin/students',
+                  element: <Suspense fallback={fallback}><AdminStudentsPage /></Suspense>,
+               },
+            ],
          },
       ],
    },

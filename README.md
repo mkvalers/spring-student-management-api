@@ -15,7 +15,7 @@ For **full backend details, setup instructions, and API documentation**, see the
 ---
 
 ## General Info
-- **Frontend:** React, TypeScript, Vite (in progress)  
+- **Frontend:** React, TypeScript, Vite, ShadCN/UI, Tailwind (in progress)  
 - **Backend:** Spring Boot, Java 17, MySQL, Spring Security, Spring Data JPA, JWT  
 
 ---
