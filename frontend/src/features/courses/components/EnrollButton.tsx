@@ -13,6 +13,22 @@ export default function EnrollButton({ courseId }: EnrollButtonProps) {
 
    const { mutate: enroll, isPending } = useMutation({
       mutationFn: (course_id: number) => studentService.enrollCourse(course_id),
+      onMutate: async (course_id) => {
+         await queryClient.cancelQueries({ queryKey: ['student', 'enrollments'] });
+         const previousEnrollments = queryClient.getQueryData(['student', 'enrollments']);
+         
+         queryClient.setQueryData(['student', 'enrollments'], (old: any) => {
+            if (!old) return old;
+            return [...old, { course_id, enrollment_id: Date.now() }];
+         });
+         
+         return { previousEnrollments };
+      },
+      onError: (err, course_id, context) => {
+         if (context?.previousEnrollments) {
+            queryClient.setQueryData(['student', 'enrollments'], context.previousEnrollments);
+         }
+      },
       onSuccess: () => {
          queryClient.invalidateQueries({ queryKey: ['student', 'enrollments'] });
       },
