@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import studentService from '@/features/student/services/studentService';
 import { useEnrollments } from '@/features/student/hooks/useEnrollments';
 import { Button } from '@/components/ui/button';
+import { HiCheck } from 'react-icons/hi2';
 
 interface EnrollButtonProps {
    courseId: number;
@@ -40,10 +41,23 @@ export default function EnrollButton({ courseId }: EnrollButtonProps) {
       <Button
          onClick={() => enroll(courseId)}
          disabled={isPending || isEnrolled}
-         variant={isEnrolled ? 'secondary' : 'default'}
-         className="w-full"
+         variant={isEnrolled ? 'outline' : 'default'}
+         className={`w-full rounded-xl transition-all duration-200 active:scale-95 ${
+            isEnrolled
+               ? 'border-primary text-primary hover:bg-primary/10'
+               : 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white'
+         }`}
       >
-         {isPending ? 'Enrolling...' : isEnrolled ? 'Enrolled' : 'Enroll'}
+         {isPending ? (
+            'Enrolling...'
+         ) : isEnrolled ? (
+            <span className="flex items-center justify-center gap-2">
+               <HiCheck className="h-5 w-5" />
+               Enrolled
+            </span>
+         ) : (
+            'Enroll'
+         )}
       </Button>
    );
 }

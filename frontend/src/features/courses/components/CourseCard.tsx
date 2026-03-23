@@ -58,13 +58,13 @@ export default function CourseCard({ course, action }: CourseCardProps) {
       <Card
          className={`transition-all duration-300 hover:scale-[1.02] hover:shadow-xl border-l-4 ${categoryColor} rounded-xl`}
       >
-         <CardHeader>
+         <CardHeader className="pb-3">
             <div className="flex items-start justify-between">
                <div className="flex-1">
-                  <CardTitle className="text-lg font-semibold">
+                  <CardTitle className="text-xl font-bold tracking-tight">
                      {course.course_name}
                   </CardTitle>
-                  <CardDescription className="font-mono text-xs mt-1">
+                  <CardDescription className="font-mono text-xs mt-1.5">
                      {course.course_code}
                   </CardDescription>
                </div>
@@ -73,7 +73,7 @@ export default function CourseCard({ course, action }: CourseCardProps) {
                </div>
             </div>
          </CardHeader>
-         <CardContent>
+         <CardContent className="pb-4">
             <div className="flex items-center gap-2">
                <span className="inline-flex items-center rounded-full bg-linear-to-r from-primary/10 to-accent/10 px-3 py-1 text-xs font-medium text-primary">
                   {course.units} {course.units === 1 ? 'Unit' : 'Units'}

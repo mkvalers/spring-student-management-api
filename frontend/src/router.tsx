@@ -28,7 +28,12 @@ function RootRedirect() {
 }
 
 const fallback = (
-   <div className="flex h-screen items-center justify-center">Loading...</div>
+   <div className="flex h-screen items-center justify-center">
+      <div className="flex flex-col items-center gap-3">
+         <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+         <p className="text-sm text-muted-foreground">Loading...</p>
+      </div>
+   </div>
 );
 
 const router = createBrowserRouter([
@@ -60,19 +65,11 @@ const router = createBrowserRouter([
             children: [
                {
                   path: '/student/dashboard',
-                  element: (
-                     <Suspense fallback={fallback}>
-                        <DashboardPage />
-                     </Suspense>
-                  ),
+                  element: <DashboardPage />,
                },
                {
                   path: '/courses',
-                  element: (
-                     <Suspense fallback={fallback}>
-                        <CoursesPage />
-                     </Suspense>
-                  ),
+                  element: <CoursesPage />,
                },
             ],
          },
@@ -86,27 +83,15 @@ const router = createBrowserRouter([
             children: [
                {
                   path: '/admin/dashboard',
-                  element: (
-                     <Suspense fallback={fallback}>
-                        <AdminDashboardPage />
-                     </Suspense>
-                  ),
+                  element: <AdminDashboardPage />,
                },
                {
                   path: '/admin/courses',
-                  element: (
-                     <Suspense fallback={fallback}>
-                        <AdminCoursesPage />
-                     </Suspense>
-                  ),
+                  element: <AdminCoursesPage />,
                },
                {
                   path: '/admin/students',
-                  element: (
-                     <Suspense fallback={fallback}>
-                        <AdminStudentsPage />
-                     </Suspense>
-                  ),
+                  element: <AdminStudentsPage />,
                },
             ],
          },

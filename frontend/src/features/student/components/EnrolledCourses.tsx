@@ -1,19 +1,16 @@
 import { useEnrollments, useDropCourse } from '../hooks/useEnrollments';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { HiAcademicCap } from 'react-icons/hi2';
+import { Link } from 'react-router-dom';
+import EnrolledCoursesSkeleton from './EnrolledCoursesSkeleton';
 
 export default function EnrolledCourses() {
    const { data: enrollments, isLoading, error } = useEnrollments();
    const { mutate: dropCourse, isPending } = useDropCourse();
 
    if (isLoading) {
-      return (
-         <Card>
-            <CardContent className="p-6">
-               <p className="text-muted-foreground">Loading enrollments...</p>
-            </CardContent>
-         </Card>
-      );
+      return <EnrolledCoursesSkeleton />;
    }
 
    if (error) {
@@ -33,7 +30,20 @@ export default function EnrolledCourses() {
                <CardTitle>My Enrolled Courses</CardTitle>
             </CardHeader>
             <CardContent>
-               <p className="text-muted-foreground">You are not enrolled in any courses yet.</p>
+               <div className="flex flex-col items-center justify-center py-12">
+                  <div className="rounded-full bg-primary/10 p-4 mb-4 animate-pulse">
+                     <HiAcademicCap className="h-12 w-12 text-primary" />
+                  </div>
+                  <h4 className="font-semibold mb-2">No Enrollments Yet</h4>
+                  <p className="text-sm text-muted-foreground text-center mb-4">
+                     You haven't enrolled in any courses yet.
+                  </p>
+                  <Link to="/courses">
+                     <Button size="sm" className="rounded-lg">
+                        Browse Courses
+                     </Button>
+                  </Link>
+               </div>
             </CardContent>
          </Card>
       );

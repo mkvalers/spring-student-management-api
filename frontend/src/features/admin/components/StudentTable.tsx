@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import type { StudentDto } from '@/types';
+import { HiUsers } from 'react-icons/hi2';
 
 interface StudentTableProps {
    students: StudentDto[];
@@ -17,8 +18,16 @@ export default function StudentTable({ students, page, pageSize, onPageChange }:
    if (!hasStudents) {
       return (
          <Card>
-            <CardContent className="p-6">
-               <p className="text-center text-muted-foreground">No students found</p>
+            <CardContent className="p-12">
+               <div className="flex flex-col items-center justify-center">
+                  <div className="rounded-full bg-primary/10 p-6 mb-4 animate-pulse">
+                     <HiUsers className="h-16 w-16 text-primary" />
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2">No Students Found</h3>
+                  <p className="text-sm text-muted-foreground text-center max-w-md">
+                     No students match your current filters. Try adjusting your search criteria.
+                  </p>
+               </div>
             </CardContent>
          </Card>
       );

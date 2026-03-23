@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useStudents } from '../hooks/useStudents';
 import StudentFilters from '../components/StudentFilters';
 import StudentTable from '../components/StudentTable';
+import StudentTableSkeleton from '../components/StudentTableSkeleton';
 
 const PAGE_SIZE = 10;
 
@@ -58,7 +59,7 @@ export default function AdminStudentsPage() {
             onClear={handleClearFilters}
          />
 
-         {isLoading && <p className="text-muted-foreground">Loading students...</p>}
+         {isLoading && <StudentTableSkeleton />}
 
          {error && <p className="text-destructive">Failed to load students. Please try again.</p>}
 

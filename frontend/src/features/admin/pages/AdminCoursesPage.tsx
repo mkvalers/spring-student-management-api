@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useCourses, useCreateCourse, useUpdateCourse, useDeleteCourse } from '@/features/courses/hooks/useCourses';
 import CourseCard from '@/features/courses/components/CourseCard';
+import CourseCardSkeleton from '@/features/courses/components/CourseCardSkeleton';
 import CourseForm, { type CourseFormData } from '@/features/courses/components/CourseForm';
 import { Button } from '@/components/ui/button';
 import type { CourseResponse } from '@/types';
@@ -47,22 +48,28 @@ export default function AdminCoursesPage() {
 
    if (isLoading) {
       return (
-         <div className="space-y-6 md:space-y-8">
-            <div>
-               <h1 className="text-2xl md:text-3xl font-bold">Manage Courses</h1>
-               <p className="text-sm md:text-base text-muted-foreground">Create, edit, and delete courses</p>
+         <div className="space-y-8 md:space-y-10">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+               <div>
+                  <h1 className="text-2xl md:text-3xl font-bold tracking-tight">Manage Courses</h1>
+                  <p className="text-sm md:text-base text-muted-foreground mt-1">Create, edit, and delete courses</p>
+               </div>
             </div>
-            <p className="text-muted-foreground">Loading courses...</p>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+               {[...Array(6)].map((_, i) => (
+                  <CourseCardSkeleton key={i} />
+               ))}
+            </div>
          </div>
       );
    }
 
    if (error) {
       return (
-         <div className="space-y-6 md:space-y-8">
+         <div className="space-y-8 md:space-y-10">
             <div>
-               <h1 className="text-2xl md:text-3xl font-bold">Manage Courses</h1>
-               <p className="text-sm md:text-base text-muted-foreground">Create, edit, and delete courses</p>
+               <h1 className="text-2xl md:text-3xl font-bold tracking-tight">Manage Courses</h1>
+               <p className="text-sm md:text-base text-muted-foreground mt-1">Create, edit, and delete courses</p>
             </div>
             <p className="text-destructive">Failed to load courses. Please try again.</p>
          </div>
@@ -70,11 +77,11 @@ export default function AdminCoursesPage() {
    }
 
    return (
-      <div className="space-y-6 md:space-y-8">
+      <div className="space-y-8 md:space-y-10">
          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-               <h1 className="text-2xl md:text-3xl font-bold">Manage Courses</h1>
-               <p className="text-sm md:text-base text-muted-foreground">Create, edit, and delete courses</p>
+               <h1 className="text-2xl md:text-3xl font-bold tracking-tight">Manage Courses</h1>
+               <p className="text-sm md:text-base text-muted-foreground mt-1">Create, edit, and delete courses</p>
             </div>
             {!showForm && !editingCourse && (
                <Button onClick={() => setShowForm(true)}>New Course</Button>
@@ -99,7 +106,7 @@ export default function AdminCoursesPage() {
          )}
 
          {!showForm && !editingCourse && (
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                {courses?.map((course) => (
                   <CourseCard
                      key={course.id}
