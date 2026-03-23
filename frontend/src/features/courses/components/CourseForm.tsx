@@ -12,6 +12,7 @@ import {
    CardTitle,
 } from '@/components/ui/card';
 import type { CourseResponse } from '@/types';
+import { HiCodeBracket, HiAcademicCap } from 'react-icons/hi2';
 
 const courseSchema = z.object({
    course_code: z
@@ -58,20 +59,26 @@ export default function CourseForm({
    });
 
    return (
-      <Card>
-         <CardHeader>
-            <CardTitle>
-               {title || (course ? 'Edit Course' : 'Create New Course')}
-            </CardTitle>
+      <Card className="bg-gradient-to-br from-card to-muted/20 border-2">
+         <CardHeader className="space-y-1">
+            <div className="flex items-center gap-3">
+               <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                  {course ? <HiCodeBracket className="h-5 w-5 text-primary" /> : <HiAcademicCap className="h-5 w-5 text-primary" />}
+               </div>
+               <CardTitle className="text-xl tracking-tight">
+                  {title || (course ? 'Edit Course' : 'Create New Course')}
+               </CardTitle>
+            </div>
          </CardHeader>
          <form onSubmit={handleSubmit(onSubmit)}>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-5">
                <div className="space-y-2">
-                  <Label htmlFor="course_code">Course Code</Label>
+                  <Label htmlFor="course_code" className="text-sm font-medium">Course Code</Label>
                   <Input
                      id="course_code"
                      placeholder="CS101"
                      disabled={!!course}
+                     className="h-11 rounded-lg transition-all focus-visible:ring-2 focus-visible:ring-primary/20"
                      {...register('course_code')}
                   />
                   {errors.course_code && (
@@ -81,10 +88,11 @@ export default function CourseForm({
                   )}
                </div>
                <div className="space-y-2">
-                  <Label htmlFor="course_name">Course Name</Label>
+                  <Label htmlFor="course_name" className="text-sm font-medium">Course Name</Label>
                   <Input
                      id="course_name"
                      placeholder="Introduction to Computer Science"
+                     className="h-11 rounded-lg transition-all focus-visible:ring-2 focus-visible:ring-primary/20"
                      {...register('course_name')}
                   />
                   {errors.course_name && (
@@ -94,14 +102,15 @@ export default function CourseForm({
                   )}
                </div>
                <div className="space-y-2">
-                  <Label htmlFor="units">Units (1-6)</Label>
+                  <Label htmlFor="units" className="text-sm font-medium">Units (1-6)</Label>
                   <Input
                      id="units"
                      type="number"
                      min="1"
                      max="6"
                      placeholder="3"
-                     {...register('units')}
+                     className="h-11 rounded-lg transition-all focus-visible:ring-2 focus-visible:ring-primary/20"
+                     {...register('units', { valueAsNumber: true })}
                   />
                   {errors.units && (
                      <p className="text-sm text-destructive">
@@ -110,8 +119,8 @@ export default function CourseForm({
                   )}
                </div>
             </CardContent>
-            <CardFooter className="flex gap-2">
-               <Button type="submit" disabled={isPending}>
+            <CardFooter className="flex gap-3 pt-2">
+               <Button type="submit" disabled={isPending} className="h-11">
                   {isPending
                      ? 'Saving...'
                      : course
@@ -123,6 +132,7 @@ export default function CourseForm({
                   variant="outline"
                   onClick={onCancel}
                   disabled={isPending}
+                  className="h-11"
                >
                   Cancel
                </Button>
